@@ -3,7 +3,7 @@ import Select from 'react-dropdown-select'
 import { useDispatch } from 'react-redux'
 
 import { CaseStatusOptions } from '../../common/constants'
-import { addCase } from '../../redux/actions'
+import { actions } from '../../redux/reducer'
 
 import styles from './AddCaseForm.module.scss'
 
@@ -15,7 +15,7 @@ const CreateCaseForm = () => {
   function handleSubmit (event) {
     event.preventDefault()
     if (typeof age === 'number' && age > 0 && CaseStatusOptions.map(({ value }) => value).includes(status)) {
-      dispatch(addCase({ age, status }))
+      dispatch(actions.addCase({ age, status }))
       setStatus('')
       setAge('')
     } else {

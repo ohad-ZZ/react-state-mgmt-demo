@@ -1,19 +1,18 @@
-import { createSelector } from 'reselect'
+import { createSelector } from '@reduxjs/toolkit'
 import { isSameDay } from 'date-fns'
 
+import { simpleSelectors } from './reducer'
 import { CaseStatus } from '../common/constants'
 
-const getCases = (state) => state.cases
+const getCases = simpleSelectors.selectAll
 
-export const getCasesOrderedByDate = createSelector(getCases, (cases) => (
-  cases.slice(0).sort(({ created: createdA }, { created: createdB }) => createdB - createdA)
-))
+export const getCasesOrderedByDate = simpleSelectors.selectAll
 
 export const getIsLoadingData = (state) => state.isLoadingCases
 
 export const getUpdatedCaseId = (state) => state.updatingCaseId
 
-export const getTotalCases = createSelector(getCases, (cases) =>  cases.length)
+export const getTotalCases = simpleSelectors.selectTotal
 
 export const getAddedToday = createSelector(getCases, (cases) => {
   const now = Date.now()

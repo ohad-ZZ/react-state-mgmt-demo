@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { CasesTable, StatusTable, AddCaseForm } from './containers'
-import { getData } from './redux/actions'
+import { actions } from './redux/reducer'
 import { getIsLoadingData } from './redux/selectors'
 
 import styles from './App.module.scss'
@@ -12,7 +12,7 @@ function App() {
   const isLoadingData = useSelector(getIsLoadingData)
 
   useEffect(() => {
-      dispatch(getData())
+      dispatch(actions.getData())
   }, [dispatch])
 
   return (

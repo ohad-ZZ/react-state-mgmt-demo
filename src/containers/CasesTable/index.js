@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import { CasesTable as CasesTableComponent } from '../../components'
-import { updateCaseStatus } from '../../redux/actions'
+import { actions } from '../../redux/reducer'
 import { getCasesOrderedByDate, getUpdatedCaseId } from '../../redux/selectors'
 
 const CasesTable = () => {
@@ -14,7 +14,7 @@ const CasesTable = () => {
       cases={cases}
       updatedCaseId={updatedCaseId}
       onCaseStatusChange={(value, id) => {
-        dispatch(updateCaseStatus(value, id))
+        dispatch(actions.updateCaseStatus(value, id))
       }}
     />
   )

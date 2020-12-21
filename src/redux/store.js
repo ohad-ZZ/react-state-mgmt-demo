@@ -1,16 +1,14 @@
-import {
-  createStore,
-  compose, applyMiddleware
-} from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import reducer from './reducer'
 import saga from './saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-const store = createStore(reducer, composeEnhancers(applyMiddleware(sagaMiddleware)))
+const store = configureStore({
+  reducer,
+  middleware: [sagaMiddleware]
+})
 
 sagaMiddleware.run(saga)
 
