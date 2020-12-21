@@ -1,0 +1,34 @@
+.App {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 80px 1fr 1fr;
+
+  &__header {
+    grid-column: 1/-1;
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    margin: 0;
+  }
+
+  &__table {
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  &__casesTable {
+    width: 100%;
+    overflow-y: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}

@@ -1,0 +1,9 @@
+.table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 8px;
+  background-color: #282c34;
+  padding: 4px;
+  border-radius: 4px;
+}
