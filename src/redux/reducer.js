@@ -1,6 +1,7 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 
 const casesAdapter = createEntityAdapter({
+  selectId: (entity) => entity.id,
   sortComparer: (({ created: createdA }, { created: createdB}) => createdB - createdA)
 })
 
@@ -53,6 +54,7 @@ const { reducer, actions } = createSlice({
     }
   }
 })
+
 export const simpleSelectors = casesAdapter.getSelectors()
 export default reducer
 export { actions }
