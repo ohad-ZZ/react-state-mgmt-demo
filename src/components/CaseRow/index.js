@@ -26,7 +26,7 @@ const CaseRow = ({
         searchable={false}
         values={[CaseStatusOptions.find(({ value }) => value === status)]}
         onChange={(values) => {
-          onSelect(id, values[0].value)
+          onSelect(values[0].value)
         }}
       />
     </td>

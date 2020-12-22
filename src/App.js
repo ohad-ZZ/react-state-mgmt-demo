@@ -1,36 +1,37 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import * as React from 'react'
+import { useRecoilValue } from 'recoil'
 
-import { CasesTable, StatusTable, AddCaseForm } from './containers'
-import { getData } from './redux/actions'
-import { getIsLoadingData } from './redux/selectors'
+import { StatusTable, CasesTable, AddCaseForm } from './containers'
+import { isLoadingCasesAtom } from './state/AppState'
+import { useLoadCases } from './state/hooks'
 
 import styles from './App.module.scss'
 
 function App() {
-  const dispatch = useDispatch()
-  const isLoadingData = useSelector(getIsLoadingData)
-
-  useEffect(() => {
-      dispatch(getData())
-  }, [dispatch])
+  const getCases = useLoadCases()
+  const isLoadingCasesData = useRecoilValue(isLoadingCasesAtom)
+  console.log(isLoadingCasesData)
+  React.useEffect(() => {
+    getCases()
+  }, [getCases])
 
   return (
     <div className={styles.App}>
       <h1 className={styles.App__header}>Covid 19 Status</h1>
       {
-        isLoadingData
-          ? <span>Loading . . .</span>
-          : (
-            <div className={styles.App__table}>
-              <StatusTable />
-            </div>
+        isLoadingCasesData
+          ? <div>Loading...</div> : (
+            <>
+              <div className={styles.App__table}>
+                <StatusTable />
+              </div>
+              <div className={styles.App__casesTable}>
+                <CasesTable />
+              </div>
+              <AddCaseForm />
+            </>
           )
       }
-      <div className={styles.App__casesTable}>
-        <CasesTable />
-      </div>
-      <AddCaseForm />
     </div>
   )
 }

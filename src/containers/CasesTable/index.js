@@ -1,22 +1,30 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useRecoilValue } from 'recoil'
 
-import { CasesTable as CasesTableComponent } from '../../components'
-import { updateCaseStatus } from '../../redux/actions'
-import { getCasesOrderedByDate, getUpdatedCaseId } from '../../redux/selectors'
+import { getCasesOrderedByDate  } from '../../state/CaseState'
+import styles from './CasesTable.module.scss'
+import CaseRow from '../CaseRow'
 
 const CasesTable = () => {
-  const dispatch = useDispatch()
-  const cases = useSelector(getCasesOrderedByDate)
-  const updatedCaseId = useSelector(getUpdatedCaseId)
+  const caseIds = useRecoilValue(getCasesOrderedByDate)
 
   return (
-    <CasesTableComponent
-      cases={cases}
-      updatedCaseId={updatedCaseId}
-      onCaseStatusChange={(value, id) => {
-        dispatch(updateCaseStatus(value, id))
-      }}
-    />
+    caseIds.length > 0
+      ? (
+        <table className={styles.casesTable}>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Discovered Date</th>
+            <th>Age</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          { caseIds.map((id) => <CaseRow key={id} id={id} />) }
+          </tbody>
+        </table>
+      )
+      : null
   )
 }
 
